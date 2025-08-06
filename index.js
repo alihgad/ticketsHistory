@@ -4,6 +4,7 @@ class TicketManager {
         this.tickets = this.loadTickets();
         this.initializeEventListeners();
         this.renderTickets();
+        this.updateUserInfo();
     }
 
     // Initialize all event listeners
@@ -39,6 +40,11 @@ class TicketManager {
             if (e.target.id === 'successModal') {
                 this.closeModal();
             }
+        });
+
+        // Logout button
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            this.handleLogout();
         });
     }
 
@@ -321,6 +327,57 @@ class TicketManager {
     saveTickets() {
         localStorage.setItem('supportTickets', JSON.stringify(this.tickets));
     }
+
+    // Handle logout
+    handleLogout() {
+        if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+            // Clear user data from localStorage
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userToken');
+            
+            // Show logout message
+            this.showNotification('تم تسجيل الخروج بنجاح', 'success');
+            
+            // Redirect to login page after delay
+            setTimeout(() => {
+                window.location.href = 'login.html'; // أو أي صفحة login أخرى
+            }, 1500);
+        }
+    }
+
+    // Update user name in header
+    updateUserInfo() {
+        const currentUser = this.getCurrentUser();
+        const userNameElement = document.getElementById('userName');
+        const avatarElement = document.querySelector('.w-10.h-10');
+        
+        if (currentUser) {
+            userNameElement.textContent = currentUser.name;
+            // Update avatar with first letter of name
+            avatarElement.textContent = currentUser.name.charAt(0);
+        }
+    }
+
+    // Get current user from localStorage or default
+    getCurrentUser() {
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            return JSON.parse(storedUser);
+        }
+        
+        // Default user if none stored
+        return {
+            name: 'أحمد محمد',
+            email: 'ahmed@example.com',
+            id: 1
+        };
+    }
+
+    // Set current user
+    setCurrentUser(userData) {
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        this.updateUserInfo();
+    }
 }
 
 // Initialize the application when DOM is loaded
@@ -336,17 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add some interactive features
 document.addEventListener('DOMContentLoaded', () => {
-    // Add hover effects to form inputs
+    // تم حذف تأثير التكبير من الـ inputs
     const inputs = document.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.parentElement.classList.add('transform', 'scale-105', 'transition-transform');
-        });
-        
-        input.addEventListener('blur', () => {
-            input.parentElement.classList.remove('transform', 'scale-105', 'transition-transform');
-        });
-    });
+    // تم إزالة الـ focus و blur event listeners اللي كانت بتكبر الـ fields
     
     // Add ripple effect to buttons
     const buttons = document.querySelectorAll('button');

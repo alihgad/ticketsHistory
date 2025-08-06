@@ -10,10 +10,30 @@
     <!-- Header -->
     <header class="bg-white shadow-lg border-b border-blue-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 class="text-3xl font-bold text-gray-900 text-center">
-                <span class="text-blue-600">🎫</span> نظام إدارة التذاكر
-            </h1>
-            <p class="text-gray-600 text-center mt-2">اضافة مشكلة جديدة ومتابعة حالة التذاكر</p>
+            <div class="flex justify-between items-center">
+                <!-- Left side - Logo and title -->
+                <div class="">
+                    <h1 class="text-3xl font-bold text-gray-900 text-center">
+                        <span class="text-blue-600">🎫</span> نظام إدارة التذاكر
+                    </h1>
+                    <p class="text-gray-600 text-center mt-2">اضافة مشكلة جديدة ومتابعة حالة التذاكر</p>
+                </div>
+                
+                <!-- Right side - User info and logout -->
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">مرحباً،</p>
+                        <p class="font-semibold text-gray-900" id="userName">أحمد محمد</p>
+                    </div>
+                    <button 
+                        id="logoutBtn" 
+                        class="px-4 py-2 bg-red-300 rounded-lg hover:bg-red-500 shadow-lg transition-all "
+                    >
+                            تسجيل الخروج
+                    </button>
+                </div>
+                
+            </div>
         </div>
     </header>
 
@@ -39,7 +59,7 @@
                             id="ticketTitle" 
                             name="title"
                             required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg"
                             placeholder="اكتب عنوان واضح للمشكلة..."
                         >
                     </div>
@@ -56,7 +76,7 @@
                             name="description"
                             required
                             rows="4"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none"
                             placeholder="اشرح المشكلة بالتفصيل..."
                         ></textarea>
                     </div>
@@ -76,7 +96,7 @@
                             >
                             <label 
                                 for="screenshot" 
-                                class="flex items-center justify-center w-full px-6 py-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-colors duration-200 file-input"
+                                class="flex items-center justify-center w-full px-6 py-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50 file-input"
                             >
                                 <div class="text-center">
                                     <span class="text-2xl mb-2 block">📸</span>
@@ -95,7 +115,7 @@
                     <div class="flex justify-end">
                         <button 
                             type="submit" 
-                            class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                            class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-lg"
                         >
                             <span class="flex items-center gap-2">
                                 <span>📤</span> إرسال التذكرة
@@ -114,7 +134,7 @@
                         <span>📋</span> سجل التذاكر
                     </h2>
                     <div class="flex items-center gap-4">
-                        <select id="statusFilter" class="px-3 py-1 rounded-md bg-white text-gray-800 text-sm">
+                        <select id="statusFilter" class="px-3 py-1 rounded-md bg-white text-gray-800 text-sm border border-gray-300">
                             <option value="">جميع الحالات</option>
                             <option value="pending">قيد الانتظار</option>
                             <option value="in-progress">قيد المعالجة</option>
